@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Website about Sauraha</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            user-select: none; /* Prevent text selection */
+        }
+        .fade {
+            opacity: 0;
+            transition: opacity 2s;
+            font-size: 24px;
+            text-align: center;
+            margin: 10px 0; /* Add margin for spacing */
+        }
+        .show {
+            opacity: 1;
+        }
+        #start-button {
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-bottom: 20px; /* Add some space below the button */
+        }
+        #password-container {
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        #password-input {
+            padding: 10px;
+            font-size: 18px;
+            margin-bottom: 10px;
+            width: 200px; /* Set a specific width for the input */
+        }
+        #toggle-password {
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            font-size: 18px; /* Icon size */
+            margin-left: -30px; /* Adjust position */
+        }
+        #invisible-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 50px;
+            background-color: transparent; /* Invisible background */
+            border: none;
+            cursor: pointer;
+        }
+        #initial-message {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;"> <!-- Disable right-click -->
+
+    <button id="start-button">Click Me</button> <!-- "Click Me" button visible initially -->
+
+    <!-- Invisible button in the top-left corner -->
+    <button id="invisible-button"></button>
+    
+    <div id="password-container"> <!-- Initially hidden -->
+        <input type="password" id="password-input" placeholder="Enter Password">
+        <button id="toggle-password">👁️</button> <!-- Eye button for toggling password visibility -->
+        <button id="submit-password">Unlock</button>
+    </div>
+    
+    <div id="text-container" style="display: none;"> <!-- Initially hidden -->
+        <div class="fade" id="initial-message">Hello its me developer and you completed your quest here is some of my unsared feeling wait--</div>
+        <div class="fade" id="text1">Firstly,Tyo chunab ko bela mah tmi le ma ramrari bolna na sakeko thau ma mero potential ko bare ma kura gareu aru koi le yesto bane ko tha thiyena xuttai lagyo maile dherai din soche i think u r just perfect maile aaile randomly yo website ma aayera kura vandai xu dont mind .</div>
+        <div class="fade" id="text2">"I Love you" .</div>
+        <div class="fade" id="text3">First time koi aru lai vandai xu kei mistake vaye sorry hai .Just take your time.</div>
+        <div class="fade" id="text4">Ok xa vane msg gara natra seen ma xodeu je vaye pani aaile samma ko lagi thanks life ma tmi le garda new experince haru gain garna paye.</div>
+        <div class="fade" id="text5">.....</div>
+    
+	</div>
+	
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const correctPassword = "BISHALHORAMA"; // Set your desired password here
+            const passwordContainer = document.getElementById('password-container');
+            const passwordInput = document.getElementById('password-input');
+            const submitButton = document.getElementById('submit-password');
+            const startButton = document.getElementById('start-button');
+            const textContainer = document.getElementById('text-container');
+            let texts = document.querySelectorAll('.fade');
+            let delay = 7000; // 10 seconds for the rest of the texts
+            let count = 1; // Start from the second text
+
+            // Step 1: Show password input after clicking "Click Me" button
+            startButton.onclick = function() {
+                startButton.style.display = 'none'; // Hide "Click Me" button
+                passwordContainer.style.display = 'flex'; // Show password input field
+            };
+
+            // Step 2: Validate password and start showing text
+            submitButton.onclick = function() {
+                const enteredPassword = passwordInput.value;
+                if (enteredPassword === correctPassword) {
+                    // Show text container and initial message immediately
+                    passwordContainer.style.display = 'none'; // Hide password input field
+                    textContainer.style.display = 'block'; // Show text container
+                    document.getElementById('initial-message').classList.add('show'); // Show the initial message
+                    showText(count); // Start showing the remaining texts
+                } else {
+                    alert('Incorrect password. Please try again.');
+                }
+            };
+
+            function showText(index) {
+                if (index < texts.length) {
+                    setTimeout(() => {
+                        texts[index].classList.add('show'); // Show the current text
+
+                        // Make the previous text disappear after a short time
+                        if (index > 0) {
+                            texts[index - 1].classList.remove('show');
+                        }
+
+                        showText(index + 1); // Show the next text
+                    }, delay);
+                }
+            }
+
+            // Toggle password visibility
+            document.getElementById('toggle-password').onclick = function() {
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text"; // Show password
+                    this.textContent = "👁️"; // Change to open eye icon
+                } else {
+                    passwordInput.type = "password"; // Hide password
+                    this.textContent = "👁️"; // Change to closed eye icon
+                }
+            };
+
+            // Invisible button action: Redirect to ok.html
+            document.getElementById('invisible-button').onclick = function() {
+                window.location.href = 'ok.html'; // Redirect to ok.html
+            };
+        });
+    </script>
+</body>
+</html>
